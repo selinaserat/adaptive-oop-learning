@@ -8,11 +8,12 @@
 </head>
 <body>
   <header><a class="brand" href="/">{ } <span>OOP Studio</span></a><span class="header-note">A little practice. A stronger foundation.</span><button id="switch" class="quiet" hidden>Switch student</button></header>
+  {% if preview_mode %}<aside class="preview-banner" role="note">Project preview · Use test names only. Profiles and progress are temporary and reset when the server restarts. No student login is enabled yet.</aside>{% endif %}
   <main>
     <div id="notice" role="status" aria-live="polite"></div>
     <section id="welcome" class="welcome">
       <div><span class="eyebrow">YOUR PATH TO OBJECT-ORIENTED PROGRAMMING</span><h1>Build understanding.<br><em>One concept at a time.</em></h1><p>Discover what you know, practice what you need, and follow a learning path that grows with you.</p><div class="steps"><span>01 · Discover</span><span>02 · Practice</span><span>03 · Master</span></div></div>
-      <form id="enroll" class="card"><span class="eyebrow">LET’S GET STARTED</span><h2>Your next chapter starts here.</h2><p>Create a student profile, then take a short diagnostic to find your starting point.</p><label for="name">Your name</label><input id="name" name="name" placeholder="e.g. Selina" required maxlength="100" autocomplete="given-name"><button class="primary" type="submit">Create profile →</button><small>Local preview · Profiles reset when the server restarts.</small></form>
+      <form id="enroll" class="card"><span class="eyebrow">LET’S GET STARTED</span><h2>Your next chapter starts here.</h2><p>Create a student profile, then take a short diagnostic to find your starting point.</p><label for="name">Your name</label><input id="name" name="name" placeholder="e.g. Selina" required maxlength="100" autocomplete="given-name"><button class="primary" type="submit">Create profile →</button><small>Test profiles · Progress resets when the server restarts.</small></form>
     </section>
     <section id="dashboard" hidden>
       <div class="section-heading"><div><span class="eyebrow">YOUR LEARNING SPACE</span><h1 id="greeting"></h1><p>Small steps today. Stronger skills tomorrow.</p></div><div class="stat"><strong id="mastered-count">0 / 3</strong><span>topics mastered</span></div></div>

@@ -70,3 +70,7 @@ No deployment, domain, or DNS changes are performed by this project setup.
 ## Flask website preview
 
 Open http://127.0.0.1:5000/ after starting run.py. Flask serves app/templates/index.html with app/static/studio.css and studio.js. The website creates student profiles, submits diagnostics/quizzes, and displays lessons, recommendations, progress and recent attempts through the existing API. It uses no build tools. Student selection stays in the current page session; refresh starts a new profile flow. The API remains available for the separate frontend teammate.
+
+## Hosted preview on Render
+
+For the test-data preview, set APP_ENV=preview, build with `pip install -r requirements.txt`, start with `gunicorn run:app`, and use `/api/health` for the health check. Keep the configured single Gunicorn worker. Set FRONTEND_ORIGINS to https://learn.selinaki.com. The website displays an explicit temporary-data notice; do not use real student data. Restarts, redeploys, and free-service sleep can reset all records. Production mode still requires persistent SQL.

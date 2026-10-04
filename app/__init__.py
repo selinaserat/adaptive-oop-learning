@@ -11,6 +11,8 @@ def create_app(config=None, repository=None):
         FRONTEND_ORIGINS=os.getenv('FRONTEND_ORIGINS','http://localhost:3000,http://127.0.0.1:3000'),
         MAX_CONTENT_LENGTH=64*1024, MASTERY_THRESHOLD=80)
     if config: app.config.update(config)
+    if app.config['APP_ENV'] not in {'development', 'preview', 'production'}:
+        raise ValueError('APP_ENV must be development, preview, or production')
     repo=repository if repository is not None else MemoryRepository()
     if app.config['APP_ENV']=='production' and not repo.persistent:
         raise RuntimeError('Production requires a persistent repository. Integrate SQLRepository first.')
@@ -26,7 +28,7 @@ def create_app(config=None, repository=None):
 
     @app.get('/')
     def home():
-        return render_template('index.html')
+        return render_template('index.html', preview_mode=app.config['APP_ENV']=='preview')
 
     @app.errorhandler(APIError)
     def api_error(error):

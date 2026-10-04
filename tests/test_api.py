@@ -191,3 +191,18 @@ def test_curriculum_cycle_rejected():
     repo.topics[1]['prerequisites']=[3]
     with pytest.raises(ValueError,match='cycle'):
         create_app({'TESTING':True},repository=repo)
+
+
+def test_explicit_preview_mode():
+    client=create_app({'APP_ENV':'preview','TESTING':True}).test_client()
+    page=client.get('/')
+    assert page.status_code==200
+    assert b'Project preview' in page.data
+    assert b'Use test names only' in page.data
+    s=student(client)
+    assert diagnose(client,s,CORRECT).status_code==200
+
+
+def test_unknown_environment_rejected():
+    with pytest.raises(ValueError,match='APP_ENV'):
+        create_app({'APP_ENV':'prodution'})
